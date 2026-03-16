@@ -12,6 +12,7 @@ const ScannerPage = () => {
 
   const [active, setActive] = useState(false);
   const [data, setData] = useState(null);
+  console.log('data: ', data);
   const [processing, setProcessing] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [capturedImg, setCapturedImg] = useState(null);
@@ -38,6 +39,13 @@ const ScannerPage = () => {
     setData(null);
     setProcessing(false);
     setIsReady(false);
+  };
+
+  const handleRetry = () => {
+    setData(null);
+    setProcessing(false);
+    setIsReady(false);
+    setStatusMsg('Aligning Sensors...');
   };
 
   // Load MediaPipe face detection when scanner is opened
@@ -155,6 +163,7 @@ const ScannerPage = () => {
                     audio={false}
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
+                    mirrored={true}
                     className="webcam-view"
                   />
                 )}
@@ -173,23 +182,36 @@ const ScannerPage = () => {
 
         {data && !processing && (
           <div className="report-panel glassmorphic-panel">
-            <h4 className="report-header">Clinical Diagnosis</h4>
-            {data.map((item, idx) => (
-              <div key={idx} className="report-item">
-                <span>✦</span> {item}
+            {data.some((m) => m.toLowerCase().includes('error')) ? (
+              <div className="error-state">
+                <div className="error-icon">⚠️</div>
+                <h4 className="report-header" style={{ color: 'var(--cherry)' }}>Connection Error</h4>
+                <p className="error-message">Unable to reach the analysis server. Please check your connection and try again.</p>
+                <button className="solution-btn animate-pop" onClick={handleRetry}>
+                  Retry Scan
+                </button>
               </div>
-            ))}
-            {!shouldHideSolution && (
-              <button className="solution-btn animate-pop" onClick={openSolution}>
-                SOLUTION
-              </button>
-            )}
-            {shouldHideSolution && !data.some((m) => m.toLowerCase().includes('error')) && (
-              <p style={{ color: 'var(--accent)', fontWeight: 'bold', marginTop: '15px', textAlign: 'center' }}>
-                {scanType === 'skin'
-                  ? 'Your skin looks perfectly clear and healthy! No treatment needed.'
-                  : 'Your hair and scalp look perfectly healthy! No treatment needed.'}
-              </p>
+            ) : (
+              <>
+                <h4 className="report-header">Clinical Diagnosis</h4>
+                {data.map((item, idx) => (
+                  <div key={idx} className="report-item">
+                    <span>✦</span> {item}
+                  </div>
+                ))}
+                {!shouldHideSolution && (
+                  <button className="solution-btn animate-pop" onClick={openSolution}>
+                    SOLUTION
+                  </button>
+                )}
+                {shouldHideSolution && (
+                  <p style={{ color: 'var(--accent)', fontWeight: 'bold', marginTop: '15px', textAlign: 'center' }}>
+                    {scanType === 'skin'
+                      ? 'Your skin looks perfectly clear and healthy! No treatment needed.'
+                      : 'Your hair and scalp look perfectly healthy! No treatment needed.'}
+                  </p>
+                )}
+              </>
             )}
           </div>
         )}

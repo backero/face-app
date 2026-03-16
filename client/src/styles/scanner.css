@@ -10,7 +10,7 @@
   border: 1px solid var(--border-color);
   border-radius: 40px;
   padding: 50px;
-  width: 460px;
+  width: min(460px, 100%);
   text-align: center;
   position: relative;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
@@ -74,8 +74,8 @@
 /* Camera Stage */
 .camera-stage {
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: min(320px, 100%);
+  aspect-ratio: 1 / 1;
   margin: 0 auto 20px;
   border-radius: 30px;
   overflow: hidden;
@@ -127,7 +127,7 @@
 
 /* Report Panel */
 .report-panel {
-  width: 400px;
+  width: min(400px, 100%);
   background: var(--card-bg);
   backdrop-filter: var(--glass-blur);
   border-radius: 35px;
@@ -135,6 +135,27 @@
   border: 1px solid var(--border-color);
   text-align: left;
   transition: all 0.5s ease;
+}
+
+/* Error State */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.error-icon {
+  font-size: 2.5rem;
+  margin-bottom: 4px;
+}
+
+.error-message {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 8px;
 }
 
 .report-header {
@@ -194,4 +215,67 @@
 @keyframes popIn {
   from { opacity: 0; transform: scale(0.8); }
   to   { opacity: 1; transform: scale(1); }
+}
+
+/* ==========================================================
+   MOBILE RESPONSIVE
+   ========================================================== */
+@media (max-width: 768px) {
+  .main-card {
+    border-radius: 28px;
+    padding: 30px 22px;
+  }
+
+  .header {
+    font-size: 1.7rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .camera-stage {
+    border-radius: 20px;
+  }
+
+  .report-panel {
+    border-radius: 28px;
+    padding: 28px 22px;
+  }
+
+  .theme-toggle-btn {
+    top: 16px;
+    left: 16px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .close-x-btn {
+    top: 16px;
+    right: 16px;
+  }
+
+  .action-btn,
+  .solution-btn {
+    padding: 15px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-card {
+    border-radius: 20px;
+    padding: 24px 16px;
+  }
+
+  .report-panel {
+    border-radius: 20px;
+    padding: 22px 16px;
+  }
+
+  .report-header {
+    font-size: 18px;
+  }
+
+  .report-item {
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
 }

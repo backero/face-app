@@ -49,7 +49,7 @@ body {
   transition: background-color 0.5s ease, background 0.5s ease;
   overflow-x: hidden;
   position: relative;
-  padding: 40px;
+  padding: 40px 20px;
 }
 
 .dashboard-wrapper {
@@ -61,6 +61,29 @@ body {
   width: 100%;
   justify-content: center;
   z-index: 10;
+}
+
+@media (max-width: 900px) {
+  .app-viewport {
+    align-items: flex-start;
+    padding: 80px 16px 40px;
+  }
+
+  .dashboard-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-viewport {
+    padding: 70px 12px 32px;
+  }
+
+  .dashboard-wrapper {
+    gap: 16px;
+  }
 }
 
 .solution-viewport {
