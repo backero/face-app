@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls D:/Development/Internal/faceapp-dev/client/src/*.png)",
+      "Bash(find D:/Development/Internal/faceapp-dev/client/src -type f | sort && echo \"\" && ls D:/Development/Internal/faceapp-dev/backend/*.json 2>/dev/null)",
+      "Bash(cd:*)",
+      "Bash(venv/Scripts/pip install:*)"
+    ]
+  }
+}
