@@ -1,32 +1,61 @@
 /* ==========================================================
-   THEME VARIABLES
+   TREYFA PRO — BOTANICAL APOTHECARY THEME
    ========================================================== */
+
+/* ── Colour tokens ── */
 :root {
-  --bg-color: #000000;
-  --bg-gradient: radial-gradient(circle at top left, #0f172a, #000000);
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --glass-blur: blur(25px);
-  --text-primary: #ffffff;
-  --text-secondary: #94a3b8;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --accent: #22c55e;
-  --primary: #6366f1;
-  --secondary: #a855f7;
-  --cherry: #d2042d;
+  --bg-deep:        #060D07;
+  --bg-mid:         #0C160B;
+  --card-bg:        rgba(11, 18, 10, 0.94);
+  --glass-blur:     blur(28px);
+
+  --gold:           #BF9B45;
+  --gold-light:     #D9B96A;
+  --gold-dim:       rgba(191, 155, 69, 0.18);
+  --terra:          #A84F38;
+  --terra-dim:      rgba(168, 79, 56, 0.18);
+
+  --cream:          #EAE4D5;
+  --cream-dim:      rgba(234, 228, 213, 0.65);
+  --sage:           #6E8E65;
+  --moss:           rgba(100, 140, 85, 0.22);
+  --moss-solid:     #253A20;
+
+  --border-color:   rgba(100, 140, 85, 0.22);
+  --text-primary:   #EAE4D5;
+  --text-secondary: #7A9470;
+
+  --accent:         #BF9B45;   /* kept for legacy refs */
+  --primary:        #BF9B45;
+  --secondary:      #A84F38;
+  --cherry:         #A84F38;
+
+  --scan-laser:     #F0A030;
+  --scan-glow:      rgba(240, 160, 48, 0.5);
 }
 
 [data-theme='light'] {
-  --bg-color: #f8fafc;
-  --bg-gradient: radial-gradient(circle at top left, #ffffff, #e2e8f0);
-  --card-bg: #ffffff;
-  --glass-blur: blur(0px);
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --border-color: rgba(0, 0, 0, 0.1);
+  --bg-deep:        #F0E9D8;
+  --bg-mid:         #F8F3E8;
+  --card-bg:        rgba(255, 251, 242, 0.96);
+  --glass-blur:     blur(0px);
+
+  --cream:          #1A140A;
+  --cream-dim:      rgba(26, 20, 10, 0.6);
+  --sage:           #5A5040;
+  --moss:           rgba(100, 80, 50, 0.14);
+  --moss-solid:     #D5C9B0;
+  --border-color:   rgba(120, 95, 60, 0.2);
+
+  --text-primary:   #1A140A;
+  --text-secondary: #6A5E4E;
+
+  --gold-dim:       rgba(191, 155, 69, 0.12);
+  --terra-dim:      rgba(168, 79, 56, 0.1);
 }
 
 /* ==========================================================
-   GLOBAL LAYOUTS
+   RESET & BASE
    ========================================================== */
 *,
 *::before,
@@ -36,31 +65,64 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
 }
 
+/* ==========================================================
+   APP VIEWPORT  (Scanner page)
+   ========================================================== */
 .app-viewport {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-gradient);
-  background-color: var(--bg-color);
-  transition: background-color 0.5s ease, background 0.5s ease;
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(30, 55, 25, 0.55), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 90%,  rgba(20, 40, 18, 0.4),  transparent);
   overflow-x: hidden;
   position: relative;
   padding: 40px 20px;
+  transition: background-color 0.5s ease;
+}
+
+/* Grain overlay */
+.app-viewport::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ambient botanical leaf (top-right) */
+.app-viewport::after {
+  content: '';
+  position: fixed;
+  top: -80px;
+  right: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(30, 60, 25, 0.35) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .dashboard-wrapper {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 50px;
-  max-width: 1200px;
+  gap: 40px;
+  max-width: 1160px;
   width: 100%;
   justify-content: center;
   z-index: 10;
+  position: relative;
 }
 
 @media (max-width: 900px) {
@@ -68,7 +130,6 @@ body {
     align-items: flex-start;
     padding: 80px 16px 40px;
   }
-
   .dashboard-wrapper {
     flex-direction: column;
     align-items: center;
@@ -77,25 +138,35 @@ body {
 }
 
 @media (max-width: 480px) {
-  .app-viewport {
-    padding: 70px 12px 32px;
-  }
-
-  .dashboard-wrapper {
-    gap: 16px;
-  }
+  .app-viewport  { padding: 70px 12px 32px; }
+  .dashboard-wrapper { gap: 16px; }
 }
 
+/* ==========================================================
+   SOLUTION VIEWPORT  (Product page)
+   ========================================================== */
 .solution-viewport {
   min-height: 100vh;
   width: 100%;
-  background: var(--bg-gradient);
-  background-color: var(--bg-color);
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse 70% 40% at 20% 0%,   rgba(28, 50, 22, 0.5), transparent),
+    radial-gradient(ellipse 50% 40% at 90% 100%, rgba(20, 38, 16, 0.4), transparent);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 0;
+  padding: 100px 0 80px;
   overflow-y: auto;
-  transition: background-color 0.5s ease, background 0.5s ease;
+  transition: background-color 0.5s ease;
   position: relative;
+}
+
+.solution-viewport::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
 }

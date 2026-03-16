@@ -145,8 +145,9 @@ const ScannerPage = () => {
           )}
 
           <h1 className="header">
-            TREYFA <span className="highlight">PRO</span>
+            Treyfa <span className="highlight">Pro</span>
           </h1>
+          <p className="scanner-tagline">Botanical Skin Intelligence</p>
 
           {!active ? (
             <button className="action-btn" onClick={() => setActive(true)}>

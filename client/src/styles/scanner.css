@@ -1,92 +1,155 @@
 /* ==========================================================
-   SCANNER PAGE — CARDS, CAMERA, BUTTONS, REPORT PANEL
+   SCANNER PAGE — BOTANICAL APOTHECARY LAB
    ========================================================== */
 
-/* Main Card */
+/* ── Main Card ── */
 .main-card {
   background: var(--card-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-color);
-  border-radius: 40px;
-  padding: 50px;
-  width: min(460px, 100%);
+  border-radius: 28px;
+  padding: 48px 44px 44px;
+  width: min(440px, 100%);
   text-align: center;
   position: relative;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(100, 140, 85, 0.08),
+    0 32px 64px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
   transition: all 0.5s ease;
 }
 
-/* Theme Toggle */
+/* Thin gold top accent bar */
+.main-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 0 0 4px 4px;
+}
+
+/* ── Theme Toggle ── */
 .theme-toggle-btn {
   position: absolute;
-  top: 30px;
-  left: 30px;
-  padding: 10px 20px;
-  border-radius: 20px;
+  top: 28px;
+  left: 28px;
+  padding: 8px 18px;
+  border-radius: 30px;
   border: 1px solid var(--border-color);
-  background: var(--card-bg);
-  color: var(--text-primary);
+  background: var(--gold-dim);
+  color: var(--gold);
   cursor: pointer;
-  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
   transition: all 0.3s ease;
   z-index: 1000;
 }
 
-/* Close / Cancel X */
+.theme-toggle-btn:hover {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+}
+
+/* ── Close / Cancel X ── */
 .close-x-btn {
   position: absolute;
-  top: 25px;
-  right: 25px;
-  background: rgba(255, 255, 255, 0.1);
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-color);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: 0.3s ease;
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 
 .close-x-btn:hover {
-  background: rgba(210, 4, 45, 0.2);
-  border-color: var(--cherry);
+  background: var(--terra-dim);
+  border-color: var(--terra);
+  color: var(--cream);
   transform: rotate(90deg);
 }
 
-/* Header */
+/* ── Brand Header ── */
 .header {
-  color: var(--text-primary);
-  font-size: 2.2rem;
-  font-weight: 900;
-  margin-bottom: 2rem;
-  letter-spacing: 3px;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--cream);
+  font-size: 2.8rem;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 0.2rem;
+  letter-spacing: 2px;
+  line-height: 1.1;
   transition: color 0.5s ease;
 }
 
 .highlight {
-  color: var(--primary);
+  color: var(--gold);
+  font-style: normal;
+  font-weight: 700;
 }
 
-/* Camera Stage */
+/* Brand tagline */
+.scanner-tagline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  margin-bottom: 2rem;
+}
+
+/* ── Camera Stage ── */
 .camera-stage {
   position: relative;
-  width: min(320px, 100%);
+  width: min(280px, 100%);
   aspect-ratio: 1 / 1;
-  margin: 0 auto 20px;
-  border-radius: 30px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
   overflow: hidden;
-  border: 4px solid var(--border-color);
-  background: #000;
-  transition: all 0.5s ease;
+  border: 3px solid var(--moss-solid);
+  background: #030805;
+  transition: all 0.6s ease;
+  box-shadow:
+    0 0 0 8px rgba(6, 14, 6, 0.8),
+    0 0 0 10px var(--moss);
 }
 
 .camera-stage.ready {
-  border-color: var(--accent);
-  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+  border-color: var(--gold);
+  box-shadow:
+    0 0 0 8px rgba(6, 14, 6, 0.8),
+    0 0 0 10px rgba(191, 155, 69, 0.35),
+    0 0 50px rgba(191, 155, 69, 0.25);
+  animation: goldPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes goldPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 8px rgba(6, 14, 6, 0.8),
+      0 0 0 10px rgba(191, 155, 69, 0.3),
+      0 0 40px rgba(191, 155, 69, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 0 8px rgba(6, 14, 6, 0.8),
+      0 0 0 12px rgba(191, 155, 69, 0.55),
+      0 0 70px rgba(191, 155, 69, 0.35);
+  }
 }
 
 .webcam-view {
@@ -95,13 +158,13 @@
   object-fit: cover;
 }
 
-/* Laser Scan Animation */
+/* ── Laser Scan Animation (warm amber) ── */
 .laser {
   position: absolute;
   width: 100%;
-  height: 5px;
-  background: var(--accent);
-  box-shadow: 0 0 20px var(--accent);
+  height: 3px;
+  background: var(--scan-laser);
+  box-shadow: 0 0 16px var(--scan-glow), 0 0 6px var(--scan-laser);
   z-index: 30;
   top: -10px;
   display: none;
@@ -109,32 +172,107 @@
 
 .scanning .laser {
   display: block;
-  animation: ultraScan 2s linear infinite;
+  animation: ultraScan 2.2s ease-in-out infinite;
 }
 
 @keyframes ultraScan {
   0%   { top: 0%;   opacity: 0; }
-  50%  { opacity: 1; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
   100% { top: 100%; opacity: 0; }
 }
 
+/* ── Status Text ── */
 .status-text {
-  color: #ef4444;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--terra);
   height: 20px;
-  margin-bottom: 15px;
-  font-size: 14px;
+  margin-bottom: 18px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
-/* Report Panel */
+/* ── Buttons ── */
+.action-btn {
+  width: 100%;
+  padding: 17px 20px;
+  border-radius: 50px;
+  border: 1.5px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.action-btn:not(.disabled):hover {
+  background: var(--gold);
+  color: var(--bg-deep);
+  box-shadow: 0 6px 22px rgba(191, 155, 69, 0.35);
+}
+
+.action-btn.disabled {
+  border-color: var(--moss);
+  color: var(--text-secondary);
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.solution-btn {
+  width: 100%;
+  padding: 17px 20px;
+  background: var(--terra);
+  color: var(--cream);
+  border: none;
+  border-radius: 50px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  transition: all 0.3s ease;
+  margin-top: 6px;
+}
+
+.solution-btn:hover {
+  background: #C05E44;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(168, 79, 56, 0.4);
+}
+
+/* ── Report Panel ── */
 .report-panel {
-  width: min(400px, 100%);
+  width: min(380px, 100%);
   background: var(--card-bg);
   backdrop-filter: var(--glass-blur);
-  border-radius: 35px;
-  padding: 40px;
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 28px;
+  padding: 40px 36px;
   border: 1px solid var(--border-color);
   text-align: left;
   transition: all 0.5s ease;
+  box-shadow:
+    0 0 0 1px rgba(100, 140, 85, 0.06),
+    0 32px 64px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.report-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--terra), transparent);
+  border-radius: 0 0 4px 4px;
 }
 
 /* Error State */
@@ -143,78 +281,61 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .error-icon {
-  font-size: 2.5rem;
-  margin-bottom: 4px;
+  font-size: 2.2rem;
+  margin-bottom: 2px;
 }
 
 .error-message {
   color: var(--text-secondary);
   font-size: 14px;
-  line-height: 1.6;
-  margin: 0 0 8px;
+  line-height: 1.7;
+  margin: 0 0 6px;
 }
 
 .report-header {
-  color: var(--cherry);
-  font-size: 22px;
-  font-weight: 900;
-  text-transform: uppercase;
-  border-bottom: 2px solid rgba(210, 4, 45, 0.3);
-  padding-bottom: 15px;
-  margin-bottom: 30px;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--terra);
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(168, 79, 56, 0.25);
+  padding-bottom: 14px;
+  margin-bottom: 26px;
+  text-transform: none;
 }
 
 .report-item {
-  color: var(--text-primary);
-  font-size: 16px;
-  margin-bottom: 20px;
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  margin-bottom: 16px;
   display: flex;
-  gap: 15px;
+  gap: 12px;
+  align-items: flex-start;
   transition: color 0.3s ease;
 }
 
-/* Buttons */
-.action-btn {
-  width: 100%;
-  padding: 18px;
-  border-radius: 16px;
-  border: none;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  color: white;
-  font-weight: 800;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+.report-item span:first-child {
+  color: var(--gold);
+  font-size: 16px;
+  line-height: 1.4;
+  flex-shrink: 0;
 }
 
-.action-btn.disabled {
-  background: #1e293b;
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.solution-btn {
-  width: 100%;
-  padding: 18px;
-  background: var(--cherry);
-  color: white;
-  border: none;
-  border-radius: 15px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
+/* ── Pop-in animation ── */
 .animate-pop {
-  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: popIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @keyframes popIn {
-  from { opacity: 0; transform: scale(0.8); }
-  to   { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scale(0.85) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 /* ==========================================================
@@ -222,60 +343,61 @@
    ========================================================== */
 @media (max-width: 768px) {
   .main-card {
-    border-radius: 28px;
-    padding: 30px 22px;
+    border-radius: 22px;
+    padding: 30px 24px;
   }
 
   .header {
-    font-size: 1.7rem;
-    margin-bottom: 1.4rem;
+    font-size: 2.2rem;
+    margin-bottom: 0.2rem;
   }
 
   .camera-stage {
-    border-radius: 20px;
+    width: min(240px, 88%);
   }
 
   .report-panel {
-    border-radius: 28px;
+    border-radius: 22px;
     padding: 28px 22px;
   }
 
   .theme-toggle-btn {
     top: 16px;
     left: 16px;
-    padding: 8px 14px;
-    font-size: 13px;
+    padding: 7px 14px;
+    font-size: 12px;
   }
 
   .close-x-btn {
     top: 16px;
     right: 16px;
   }
-
-  .action-btn,
-  .solution-btn {
-    padding: 15px;
-    font-size: 14px;
-  }
 }
 
 @media (max-width: 480px) {
   .main-card {
-    border-radius: 20px;
-    padding: 24px 16px;
+    border-radius: 18px;
+    padding: 24px 18px;
   }
 
   .report-panel {
-    border-radius: 20px;
-    padding: 22px 16px;
+    border-radius: 18px;
+    padding: 22px 18px;
   }
 
   .report-header {
-    font-size: 18px;
+    font-size: 1.1rem;
   }
 
   .report-item {
-    font-size: 14px;
-    margin-bottom: 14px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .action-btn,
+  .solution-btn {
+    padding: 15px;
+    font-size: 12px;
+    letter-spacing: 2px;
   }
 }

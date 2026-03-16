@@ -60,6 +60,7 @@ const SolutionPage = () => {
       <div className="full-width-container">
         <h2 className="cherry-header-main">Your Clinical Prescription</h2>
 
+
         <div className="product-stack-full">
           {recommended.map((p) => (
             <ProductRow
