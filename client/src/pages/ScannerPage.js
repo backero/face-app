@@ -12,7 +12,7 @@ const ScannerPage = () => {
 
   const [active, setActive] = useState(false);
   const [data, setData] = useState(null);
-  console.log('data: ', data);
+  console.log('data: ', data); 
   const [processing, setProcessing] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [capturedImg, setCapturedImg] = useState(null);
