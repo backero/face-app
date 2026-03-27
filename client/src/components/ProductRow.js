@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ProductRow = ({ p, isRecommended, selectedSizes, setSelectedSizes, handleBuyNow, onAfter45 }) => {
+  const [impactActive, setImpactActive] = useState(false);
   const isFacewash = p.name.toLowerCase().includes('facewash');
 
+  const handleImpactToggle = () => {
+    if (isRecommended) setImpactActive((prev) => !prev);
+  };
+
   return (
-    <div className="masterpiece-row">
+    <div className={`masterpiece-row ${impactActive ? 'impact-active' : ''}`}>
       <div className="col-product">
-        <div className="img-frame">
+        <div className="img-frame" onClick={handleImpactToggle} style={{ cursor: isRecommended ? 'pointer' : 'default' }}>
           <img src={p.img} alt={p.name} />
         </div>
         <h3 className="product-title-small">{p.name}</h3>
@@ -24,6 +29,17 @@ const ProductRow = ({ p, isRecommended, selectedSizes, setSelectedSizes, handleB
             <p>{p.howToUse}</p>
           </div>
         </div>
+        {isRecommended && p.whyItWorks && (
+          <div className="why-it-works">
+            <span className="why-it-works-label">Why this works for you</span>
+            <p>{p.whyItWorks}</p>
+          </div>
+        )}
+        {impactActive && isRecommended && (
+          <p className="product-impact-msg">
+            ✓ Adding this to your routine targets the issue detected in your scan
+          </p>
+        )}
       </div>
 
       <div className="col-capacity">
@@ -47,10 +63,10 @@ const ProductRow = ({ p, isRecommended, selectedSizes, setSelectedSizes, handleB
           onClick={() => isRecommended && onAfter45(p)}
           disabled={!isRecommended}
         >
-          AFTER 45 DAYS
+          After 30 Days
         </button>
         <button className="primary-buy-btn" onClick={() => handleBuyNow(p)}>
-          BUY NOW
+          Buy Now
         </button>
       </div>
     </div>

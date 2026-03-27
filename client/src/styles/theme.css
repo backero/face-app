@@ -1,57 +1,132 @@
 /* ==========================================================
-   TREYFA PRO — BOTANICAL APOTHECARY THEME
+   TREYFA PRO — PREMIUM CLINICAL THEME
+   Clean, minimal, Apple Health / dermatology style
    ========================================================== */
 
-/* ── Colour tokens ── */
+/* ── Design Tokens ── */
 :root {
-  --bg-deep:        #060D07;
-  --bg-mid:         #0C160B;
-  --card-bg:        rgba(11, 18, 10, 0.94);
-  --glass-blur:     blur(28px);
+  /* Backgrounds */
+  --bg-page:    #F7F7F8;
+  --bg-card:    #FFFFFF;
+  --bg-subtle:  #F0F0F2;
+  --bg-input:   #F5F5F6;
 
-  --gold:           #BF9B45;
-  --gold-light:     #D9B96A;
-  --gold-dim:       rgba(191, 155, 69, 0.18);
-  --terra:          #A84F38;
-  --terra-dim:      rgba(168, 79, 56, 0.18);
+  /* Text */
+  --text-primary:   #1E1E1E;
+  --text-secondary: #6B7280;
+  --text-muted:     #9CA3AF;
+  --text-on-dark:   #FFFFFF;
 
-  --cream:          #EAE4D5;
-  --cream-dim:      rgba(234, 228, 213, 0.65);
-  --sage:           #6E8E65;
-  --moss:           rgba(100, 140, 85, 0.22);
-  --moss-solid:     #253A20;
+  /* Accent */
+  --accent:       #4A90E2;
+  --accent-light: rgba(74, 144, 226, 0.10);
+  --accent-dim:   rgba(74, 144, 226, 0.18);
+  --accent-hover: #3A7BC8;
 
-  --border-color:   rgba(100, 140, 85, 0.22);
-  --text-primary:   #EAE4D5;
-  --text-secondary: #7A9470;
+  /* CTA (dark pill buttons) */
+  --cta-bg:   #1E1E1E;
+  --cta-text: #FFFFFF;
 
-  --accent:         #BF9B45;   /* kept for legacy refs */
-  --primary:        #BF9B45;
-  --secondary:      #A84F38;
-  --cherry:         #A84F38;
+  /* Status */
+  --color-danger:   #EF4444;
+  --color-warning:  #F59E0B;
+  --color-success:  #22C55E;
+  --color-purple:   #8B5CF6;
 
-  --scan-laser:     #F0A030;
-  --scan-glow:      rgba(240, 160, 48, 0.5);
+  /* Borders */
+  --border:    rgba(0, 0, 0, 0.08);
+  --border-md: rgba(0, 0, 0, 0.13);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.10);
+
+  /* Radius */
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 24px;
+
+  /* Scanner */
+  --scan-line: #4A90E2;
+  --scan-glow: rgba(74, 144, 226, 0.45);
+
+  /* ── Legacy variable aliases (keep existing CSS classes working) ── */
+  --bg-deep:      #F7F7F8;
+  --bg-mid:       #F0F0F2;
+  --card-bg:      #FFFFFF;
+  --glass-blur:   blur(0px);
+
+  --cream:        #1E1E1E;
+  --cream-dim:    rgba(30, 30, 30, 0.65);
+  --sage:         #6B7280;
+  --moss:         rgba(0, 0, 0, 0.06);
+  --moss-solid:   #E5E7EB;
+
+  --gold:         #4A90E2;
+  --gold-light:   #6AAEF8;
+  --gold-dim:     rgba(74, 144, 226, 0.12);
+
+  --terra:        #1E1E1E;
+  --terra-dim:    rgba(30, 30, 30, 0.07);
+
+  --border-color: rgba(0, 0, 0, 0.08);
+
+  --text-primary:   #1E1E1E;
+  --text-secondary: #6B7280;
+
+  --accent:     #4A90E2;
+  --primary:    #4A90E2;
+  --secondary:  #1E1E1E;
+  --cherry:     #1E1E1E;
+
+  --scan-laser: #4A90E2;
+  --scan-glow:  rgba(74, 144, 226, 0.4);
 }
 
-[data-theme='light'] {
-  --bg-deep:        #F0E9D8;
-  --bg-mid:         #F8F3E8;
-  --card-bg:        rgba(255, 251, 242, 0.96);
-  --glass-blur:     blur(0px);
+/* Dark mode override */
+[data-theme='dark'] {
+  --bg-page:   #111113;
+  --bg-card:   #1C1C1E;
+  --bg-subtle: #242426;
+  --bg-input:  #2C2C2E;
 
-  --cream:          #1A140A;
-  --cream-dim:      rgba(26, 20, 10, 0.6);
-  --sage:           #5A5040;
-  --moss:           rgba(100, 80, 50, 0.14);
-  --moss-solid:     #D5C9B0;
-  --border-color:   rgba(120, 95, 60, 0.2);
+  --text-primary:   #F5F5F5;
+  --text-secondary: #8E8E93;
+  --text-muted:     #636366;
+  --text-on-dark:   #FFFFFF;
 
-  --text-primary:   #1A140A;
-  --text-secondary: #6A5E4E;
+  --accent:       #4A90E2;
+  --accent-light: rgba(74, 144, 226, 0.14);
+  --accent-dim:   rgba(74, 144, 226, 0.2);
+  --accent-hover: #5A9EEA;
 
-  --gold-dim:       rgba(191, 155, 69, 0.12);
-  --terra-dim:      rgba(168, 79, 56, 0.1);
+  --cta-bg:   #FFFFFF;
+  --cta-text: #1E1E1E;
+
+  --border:    rgba(255, 255, 255, 0.08);
+  --border-md: rgba(255, 255, 255, 0.14);
+
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.25);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.35);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+
+  /* Legacy compat */
+  --bg-deep:      #111113;
+  --bg-mid:       #1C1C1E;
+  --card-bg:      #1C1C1E;
+  --cream:        #F5F5F5;
+  --cream-dim:    rgba(245, 245, 245, 0.65);
+  --sage:         #8E8E93;
+  --moss:         rgba(255, 255, 255, 0.06);
+  --moss-solid:   #3A3A3C;
+  --gold:         #4A90E2;
+  --gold-dim:     rgba(74, 144, 226, 0.15);
+  --terra:        #F5F5F5;
+  --terra-dim:    rgba(245, 245, 245, 0.07);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-primary:   #F5F5F5;
+  --text-secondary: #8E8E93;
 }
 
 /* ==========================================================
@@ -65,10 +140,12 @@
 
 body {
   margin: 0;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-color: var(--bg-deep);
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-page);
   color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ==========================================================
@@ -79,66 +156,38 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-deep);
-  background-image:
-    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(30, 55, 25, 0.55), transparent),
-    radial-gradient(ellipse 60% 50% at 80% 90%,  rgba(20, 40, 18, 0.4),  transparent);
+  background-color: var(--bg-page);
   overflow-x: hidden;
   position: relative;
-  padding: 40px 20px;
-  transition: background-color 0.5s ease;
-}
-
-/* Grain overlay */
-.app-viewport::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.035;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Ambient botanical leaf (top-right) */
-.app-viewport::after {
-  content: '';
-  position: fixed;
-  top: -80px;
-  right: -80px;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(30, 60, 25, 0.35) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+  padding: 48px 20px;
+  transition: background-color 0.3s ease;
 }
 
 .dashboard-wrapper {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 40px;
-  max-width: 1160px;
+  gap: 32px;
+  max-width: 1080px;
   width: 100%;
   justify-content: center;
-  z-index: 10;
   position: relative;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 860px) {
   .app-viewport {
     align-items: flex-start;
-    padding: 80px 16px 40px;
+    padding: 72px 16px 40px;
   }
   .dashboard-wrapper {
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .app-viewport  { padding: 70px 12px 32px; }
+  .app-viewport  { padding: 64px 12px 32px; }
   .dashboard-wrapper { gap: 16px; }
 }
 
@@ -148,25 +197,11 @@ body {
 .solution-viewport {
   min-height: 100vh;
   width: 100%;
-  background-color: var(--bg-deep);
-  background-image:
-    radial-gradient(ellipse 70% 40% at 20% 0%,   rgba(28, 50, 22, 0.5), transparent),
-    radial-gradient(ellipse 50% 40% at 90% 100%, rgba(20, 38, 16, 0.4), transparent);
+  background-color: var(--bg-page);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 0 80px;
+  padding: 96px 0 80px;
   overflow-y: auto;
-  transition: background-color 0.5s ease;
-  position: relative;
-}
-
-.solution-viewport::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 0;
+  transition: background-color 0.3s ease;
 }
