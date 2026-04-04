@@ -1,0 +1,207 @@
+/* ==========================================================
+   TREYFA PRO — PREMIUM CLINICAL THEME
+   Clean, minimal, Apple Health / dermatology style
+   ========================================================== */
+
+/* ── Design Tokens ── */
+:root {
+  /* Backgrounds */
+  --bg-page:    #F7F7F8;
+  --bg-card:    #FFFFFF;
+  --bg-subtle:  #F0F0F2;
+  --bg-input:   #F5F5F6;
+
+  /* Text */
+  --text-primary:   #1E1E1E;
+  --text-secondary: #6B7280;
+  --text-muted:     #9CA3AF;
+  --text-on-dark:   #FFFFFF;
+
+  /* Accent */
+  --accent:       #4A90E2;
+  --accent-light: rgba(74, 144, 226, 0.10);
+  --accent-dim:   rgba(74, 144, 226, 0.18);
+  --accent-hover: #3A7BC8;
+
+  /* CTA (dark pill buttons) */
+  --cta-bg:   #1E1E1E;
+  --cta-text: #FFFFFF;
+
+  /* Status */
+  --color-danger:   #EF4444;
+  --color-warning:  #F59E0B;
+  --color-success:  #22C55E;
+  --color-purple:   #8B5CF6;
+
+  /* Borders */
+  --border:    rgba(0, 0, 0, 0.08);
+  --border-md: rgba(0, 0, 0, 0.13);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.10);
+
+  /* Radius */
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 24px;
+
+  /* Scanner */
+  --scan-line: #4A90E2;
+  --scan-glow: rgba(74, 144, 226, 0.45);
+
+  /* ── Legacy variable aliases (keep existing CSS classes working) ── */
+  --bg-deep:      #F7F7F8;
+  --bg-mid:       #F0F0F2;
+  --card-bg:      #FFFFFF;
+  --glass-blur:   blur(0px);
+
+  --cream:        #1E1E1E;
+  --cream-dim:    rgba(30, 30, 30, 0.65);
+  --sage:         #6B7280;
+  --moss:         rgba(0, 0, 0, 0.06);
+  --moss-solid:   #E5E7EB;
+
+  --gold:         #4A90E2;
+  --gold-light:   #6AAEF8;
+  --gold-dim:     rgba(74, 144, 226, 0.12);
+
+  --terra:        #1E1E1E;
+  --terra-dim:    rgba(30, 30, 30, 0.07);
+
+  --border-color: rgba(0, 0, 0, 0.08);
+
+  --text-primary:   #1E1E1E;
+  --text-secondary: #6B7280;
+
+  --accent:     #4A90E2;
+  --primary:    #4A90E2;
+  --secondary:  #1E1E1E;
+  --cherry:     #1E1E1E;
+
+  --scan-laser: #4A90E2;
+  --scan-glow:  rgba(74, 144, 226, 0.4);
+}
+
+/* Dark mode override */
+[data-theme='dark'] {
+  --bg-page:   #111113;
+  --bg-card:   #1C1C1E;
+  --bg-subtle: #242426;
+  --bg-input:  #2C2C2E;
+
+  --text-primary:   #F5F5F5;
+  --text-secondary: #8E8E93;
+  --text-muted:     #636366;
+  --text-on-dark:   #FFFFFF;
+
+  --accent:       #4A90E2;
+  --accent-light: rgba(74, 144, 226, 0.14);
+  --accent-dim:   rgba(74, 144, 226, 0.2);
+  --accent-hover: #5A9EEA;
+
+  --cta-bg:   #FFFFFF;
+  --cta-text: #1E1E1E;
+
+  --border:    rgba(255, 255, 255, 0.08);
+  --border-md: rgba(255, 255, 255, 0.14);
+
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.25);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.35);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+
+  /* Legacy compat */
+  --bg-deep:      #111113;
+  --bg-mid:       #1C1C1E;
+  --card-bg:      #1C1C1E;
+  --cream:        #F5F5F5;
+  --cream-dim:    rgba(245, 245, 245, 0.65);
+  --sage:         #8E8E93;
+  --moss:         rgba(255, 255, 255, 0.06);
+  --moss-solid:   #3A3A3C;
+  --gold:         #4A90E2;
+  --gold-dim:     rgba(74, 144, 226, 0.15);
+  --terra:        #F5F5F5;
+  --terra-dim:    rgba(245, 245, 245, 0.07);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-primary:   #F5F5F5;
+  --text-secondary: #8E8E93;
+}
+
+/* ==========================================================
+   RESET & BASE
+   ========================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ==========================================================
+   APP VIEWPORT  (Scanner page)
+   ========================================================== */
+.app-viewport {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-page);
+  overflow-x: hidden;
+  position: relative;
+  padding: 48px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
+  max-width: 1080px;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+}
+
+@media (max-width: 860px) {
+  .app-viewport {
+    align-items: flex-start;
+    padding: 72px 16px 40px;
+  }
+  .dashboard-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-viewport  { padding: 64px 12px 32px; }
+  .dashboard-wrapper { gap: 16px; }
+}
+
+/* ==========================================================
+   SOLUTION VIEWPORT  (Product page)
+   ========================================================== */
+.solution-viewport {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-page);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 96px 0 80px;
+  overflow-y: auto;
+  transition: background-color 0.3s ease;
+}

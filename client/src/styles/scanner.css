@@ -1,0 +1,386 @@
+/* ==========================================================
+   SCANNER PAGE — PREMIUM CLINICAL
+   ========================================================== */
+
+/* ── Theme Toggle ── */
+.theme-toggle-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-toggle-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+/* ── Close / Cancel X ── */
+.close-x-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
+}
+
+.close-x-btn:hover {
+  background: #FEE2E2;
+  border-color: rgba(239, 68, 68, 0.3);
+  color: var(--color-danger);
+  transform: rotate(90deg);
+}
+
+/* ── Main Card ── */
+.main-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 44px 40px 40px;
+  width: min(420px, 100%);
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+/* ── Brand Header ── */
+.header {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  color: var(--text-primary);
+  font-size: 2.6rem;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 0.2rem;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+}
+
+.highlight {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Brand tagline */
+.scanner-tagline {
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+  margin-bottom: 2rem;
+}
+
+/* ── Camera Stage ── */
+.camera-stage {
+  position: relative;
+  width: min(260px, 100%);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--border-md);
+  background: var(--bg-subtle);
+  transition: all 0.5s ease;
+  box-shadow:
+    0 0 0 6px var(--bg-page),
+    0 0 0 8px var(--border);
+}
+
+.camera-stage.ready {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 6px var(--bg-page),
+    0 0 0 8px var(--accent-dim),
+    0 0 40px var(--accent-light);
+  animation: ringPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 6px var(--bg-page),
+      0 0 0 8px rgba(74, 144, 226, 0.2),
+      0 0 32px rgba(74, 144, 226, 0.12);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px var(--bg-page),
+      0 0 0 10px rgba(74, 144, 226, 0.4),
+      0 0 56px rgba(74, 144, 226, 0.22);
+  }
+}
+
+.webcam-view {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Scan Line Animation ── */
+.laser {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--scan-line), transparent);
+  box-shadow: 0 0 12px var(--scan-glow), 0 0 4px var(--scan-line);
+  z-index: 30;
+  top: -10px;
+  display: none;
+}
+
+.scanning .laser {
+  display: block;
+  animation: scanLine 2s ease-in-out infinite;
+}
+
+@keyframes scanLine {
+  0%   { top: 0%;   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ── Scan progress messages ── */
+.status-text {
+  color: var(--accent);
+  height: 18px;
+  margin-bottom: 18px;
+  font-size: 11.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 500;
+  min-height: 18px;
+}
+
+.scan-progress-wrap {
+  margin-bottom: 18px;
+}
+
+.scan-progress-msg {
+  font-size: 12px;
+  color: var(--text-secondary);
+  letter-spacing: 0.4px;
+  height: 20px;
+  transition: opacity 0.4s ease;
+}
+
+.scan-progress-bar-track {
+  height: 3px;
+  background: var(--bg-subtle);
+  border-radius: 4px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.scan-progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 1s linear;
+}
+
+/* ── Buttons ── */
+.action-btn {
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 50px;
+  border: 1.5px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 12.5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.2s ease;
+}
+
+.action-btn:not(.disabled):hover {
+  background: var(--accent);
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+}
+
+.action-btn.disabled {
+  border-color: var(--border-md);
+  color: var(--text-muted);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.solution-btn {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--cta-bg);
+  color: var(--cta-text);
+  border: none;
+  border-radius: 50px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 12.5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.solution-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* ── Report Panel ── */
+.report-panel {
+  width: min(360px, 100%);
+  background: var(--bg-card);
+  border-radius: var(--r-lg);
+  padding: 36px 32px;
+  border: 1px solid var(--border);
+  text-align: left;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.report-header {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 14px;
+  margin-bottom: 22px;
+}
+
+.report-item {
+  color: var(--text-primary);
+  font-size: 13.5px;
+  line-height: 1.65;
+  margin-bottom: 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.report-item span:first-child {
+  color: var(--accent);
+  font-size: 15px;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+/* Error state */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.error-icon {
+  font-size: 2rem;
+  margin-bottom: 2px;
+}
+
+.error-message {
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  line-height: 1.7;
+  margin: 0 0 6px;
+}
+
+/* ── Pop-in animation ── */
+.animate-pop {
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.88) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Glassmorphic panel (kept for compat) ── */
+.glassmorphic-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+@media (max-width: 768px) {
+  .main-card {
+    border-radius: var(--r-md);
+    padding: 28px 22px;
+  }
+
+  .header { font-size: 2.1rem; }
+
+  .camera-stage {
+    width: min(230px, 88%);
+  }
+
+  .report-panel {
+    border-radius: var(--r-md);
+    padding: 26px 20px;
+  }
+
+  .theme-toggle-btn {
+    top: 14px;
+    left: 14px;
+    padding: 7px 13px;
+    font-size: 12px;
+  }
+
+  .close-x-btn {
+    top: 14px;
+    right: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-card {
+    border-radius: var(--r-sm);
+    padding: 22px 16px;
+  }
+
+  .report-panel {
+    border-radius: var(--r-sm);
+    padding: 20px 16px;
+  }
+
+  .action-btn,
+  .solution-btn {
+    padding: 14px;
+    font-size: 11.5px;
+    letter-spacing: 1.5px;
+  }
+}
