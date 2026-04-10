@@ -386,7 +386,8 @@ const ScannerController = () => {
         const form = new FormData();
         form.append('file', blob, 'scan.jpg');
         form.append('scan_type', scanType);
-        const res = await axios.post('http://127.0.0.1:8000/analyze', form);
+        const API = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
+        const res = await axios.post(`${API}/analyze`, form);
         setData(res.data.problems);
         setPhase('results');
       } catch {
